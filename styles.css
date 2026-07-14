@@ -537,3 +537,18 @@ html,body{height:100%;overflow:hidden;background:var(--ink)}
   .pull{font-size:1.15rem;padding-left:1.1rem}
   .slide-counter{display:none}
 }
+
+/* ==========================================================================
+   THE PATTERN — brand texture on the forest slides.
+   These are the deck's text-heavy slides (brand architecture, white space,
+   claim discipline) and were flat colour. The root-and-leaf pattern is the
+   brand's own, sat at 10% on luminosity so it reads as TEXTURE, never as
+   wallpaper competing with the copy. Chosen from 4 candidates by rendering
+   each one behind real copy: the other three tile visibly.
+   Deliberately NOT used on the bone/linen slides -- the plate is dark green.
+   ========================================================================== */
+.slide--forest::before{
+  content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+  background-image:url('images/pat-04.jpg');background-size:cover;
+  opacity:.10;mix-blend-mode:luminosity;
+}
