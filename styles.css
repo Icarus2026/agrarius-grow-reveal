@@ -397,7 +397,7 @@ html,body{height:100%;overflow:hidden;background:var(--ink)}
 
 /* contained media panel: show the whole frame, never crop */
 .panel-media{position:absolute;right:0;top:0;width:47%;height:100%;z-index:1;
-  display:flex;align-items:center;justify-content:center;padding:4vw}
+  display:flex;align-items:center;justify-content:center;padding:2.5vw}
 .panel-media img,.panel-media video{width:auto;max-width:100%;max-height:74%;height:auto;object-fit:contain}
 
 /* ==========================================================================
