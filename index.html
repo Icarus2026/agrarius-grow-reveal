@@ -6,7 +6,7 @@
 <title>Agrarius Grow · Brand Proposal · Prepared for Mountain Valley MD</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,500;0,6..96,600;0,6..96,700;1,6..96,500;1,6..96,600&family=Inter:wght@300;400;500;600;700&display=block" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,500;0,6..96,600;0,6..96,700;1,6..96,500;1,6..96,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -620,9 +620,11 @@
   <!-- 23 · CLOSE -->
   <section class="slide slide--light">
     <div class="slide__content" style="text-align:center">
-      <video class="close-reveal" autoplay muted playsinline preload="auto">
-        <source src="images/logo-reveal.web.mp4" type="video/mp4">
-      </video>
+      <!-- This was the logo-reveal video with mix-blend-mode:multiply. Chromium does
+           not reliably composite a blended video layer: it rendered as a pale
+           rectangle with no logo in it, on the FINAL slide. A static mark is worth
+           more here than an animation that may not blend. Do not put it back. -->
+      <img class="close-mark" src="images/logo-ink.png" alt="Agrarius Grow">
       <h2 class="hero" style="margin-top:1.4rem;max-width:20ch;margin-left:auto;margin-right:auto">
         The technology is proven.<br><em>Now it needs a brand worth buying.</em>
       </h2>

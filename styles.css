@@ -21,7 +21,10 @@
   --earth:#A68A6A;
   --earth-lift:#C4A57F;      /* eyebrows/accents on dark: passes contrast, gold still reads */
 
-  --font-display:'Bodoni Moda','Didot',Georgia,serif;
+  /* Didot is deliberately NOT in the fallback: it is another hairline Didone, so
+     if the webfont fails to load (conference wifi) it reintroduces the exact
+     legibility bug we just fixed. Georgia is the sturdy fallback. */
+  --font-display:'Bodoni Moda',Georgia,'Times New Roman',serif;
   --font-body:'Inter',system-ui,-apple-system,sans-serif;
 
   --type-display:clamp(3.6rem,9vw,11rem);
@@ -46,7 +49,9 @@
   --on-dark-3:rgba(242,239,231,.68);
   --on-light-1:rgba(19,35,24,.95);
   --on-light-2:rgba(19,35,24,.84);
-  --on-light-3:rgba(19,35,24,.62);
+  /* .62 measured ~4.4:1 on bone — under the 4.5:1 line, and it carries the
+     captions/sources/notes, i.e. exactly what greys out on a projector. */
+  --on-light-3:rgba(19,35,24,.72);
 }
 
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -207,8 +212,8 @@ html,body{height:100%;overflow:hidden;background:var(--ink)}
 .slide--light .source,.slide--linen .source{color:var(--on-light-3)}
 
 .slide-counter{position:fixed;bottom:1.6rem;right:1.8rem;z-index:100;pointer-events:none;
-  font-size:.72rem;letter-spacing:.18em;color:rgba(242,239,231,.4);font-family:var(--font-body)}
-.slide-counter.is-light{color:rgba(19,35,24,.4)}
+  font-size:.72rem;letter-spacing:.18em;color:rgba(242,239,231,.7);font-family:var(--font-body)}
+.slide-counter.is-light{color:rgba(19,35,24,.7)}
 
 /* ==========================================================================
    IDENTITY SYSTEM — composed natively from the real assets.
@@ -309,7 +314,7 @@ html,body{height:100%;overflow:hidden;background:var(--ink)}
 .slide--light .tl--target::before,.slide--linen .tl--target::before{background:var(--earth)}
 
 .pull{font-family:var(--font-display);font-optical-sizing:none;font-variation-settings:'opsz' 14;
-  font-weight:500;font-style:italic;font-size:clamp(1.25rem,2.1vw,1.75rem);line-height:1.45;
+  font-weight:600;font-style:italic;font-size:clamp(1.25rem,2.1vw,1.75rem);line-height:1.45;
   color:var(--on-dark-1);max-width:62ch;margin-top:2rem;padding-left:1.6rem;border-left:2px solid var(--earth)}
 .slide--light .pull,.slide--linen .pull{color:var(--forest-deep)}
 
@@ -318,8 +323,13 @@ html,body{height:100%;overflow:hidden;background:var(--ink)}
   display:flex;align-items:center;justify-content:center;padding:4vw}
 .panel-media img,.panel-media video{width:auto;max-width:100%;max-height:74%;height:auto;object-fit:contain}
 
-/* closing reveal: paper video sitting on the bone canvas */
-.close-reveal{width:min(42vw,500px);height:auto;display:block;margin:0 auto;mix-blend-mode:multiply}
+/* Closing mark: a STATIC png, deliberately. The logo-reveal video needed
+   mix-blend-mode:multiply to sit on the bone canvas, and Chromium does not
+   reliably composite a blended video layer — it showed as a pale empty
+   rectangle. Never risk the final slide on a blend mode. */
+.close-mark{width:min(26vw,290px);height:auto;display:block;margin:0 auto}
+@media (min-width:821px) and (max-height:840px){ .close-mark{width:min(19vw,210px)} }
+@media (max-width:820px){ .close-mark{width:56vw} }
 
 .claim-note{margin-top:2rem;padding:1.2rem 1.4rem;border-left:2px solid var(--earth);
   font-size:.96rem;line-height:1.6;color:var(--on-dark-2);max-width:60ch;background:rgba(242,239,231,.05)}
@@ -395,10 +405,12 @@ html,body{height:100%;overflow:hidden;background:var(--ink)}
 
   .grid-2,.grid-3,.grid-4,.price-row,.mech,.lockups{grid-template-columns:1fr!important;gap:1.6rem}
   .app-grid{grid-template-columns:1fr!important;gap:1.4rem}
-  .palette{grid-template-columns:repeat(5,1fr)!important;gap:1px}
-  .sw{aspect-ratio:1/2;padding:.5rem .35rem}
-  .sw b{font-size:.62rem}
-  .sw span{font-size:.54rem;letter-spacing:.02em}
+  /* 5 columns on a 390px phone = ~65px swatches with 8.6px hex codes: not
+     readable. Two columns, full-size labels. */
+  .palette{grid-template-columns:repeat(2,1fr)!important;gap:2px}
+  .sw{aspect-ratio:5/2;padding:.8rem .7rem}
+  .sw b{font-size:.82rem}
+  .sw span{font-size:.72rem;letter-spacing:.06em;opacity:.85}
 
   .arch{grid-template-columns:1fr!important;gap:1rem}
   .arch-arrow{transform:rotate(90deg);justify-content:center}
