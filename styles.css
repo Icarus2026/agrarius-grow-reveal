@@ -297,6 +297,13 @@ html,body{height:100%;overflow:hidden;background:var(--ink)}
   font-weight:600;font-size:clamp(1.5rem,2.6vw,2.2rem);line-height:1.15}
 .contrast-vs{font-size:.74rem;letter-spacing:.2em;text-transform:uppercase;color:var(--earth-lift);font-weight:600}
 
+/* The science slide: the network loop is the SUBJECT, but this slide carries four
+   cards of copy, so the video runs as texture. Heavier wash than the story slide,
+   and the cards get their own ground so the text never sits on moving footage. */
+.slide--science .bg-video{opacity:.3}
+.slide--science .scrim--full{background:rgba(14,26,20,.72)}
+.slide--science .mech-card{background:rgba(14,26,20,.72);backdrop-filter:blur(2px)}
+
 /* The arrival slide: the box and the shaft of light are centre-right, the door
    and its shadow already dark on the left, so the copy sits there and the scrim
    only needs to lift the left third. */
