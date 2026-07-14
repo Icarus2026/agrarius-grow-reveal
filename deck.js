@@ -23,8 +23,21 @@ addEventListener('keydown', e => {
   if (e.key === 'End') { e.preventDefault(); go(slides().length-1); }
 });
 
-// The closing mark is a static image now: the reveal video would not composite
-// reliably (see the note in styles.css), so there is nothing to replay here.
+// The closing logo-reveal draws itself in each time the slide is reached, then
+// HOLDS on the finished mark. It must never loop: the first frame is blank
+// paper, so looping would wipe the logo away in front of the room.
+const reveal = document.querySelector('.reveal-video');
+if (reveal) {
+  reveal.loop = false;
+  const play = () => { reveal.currentTime = 0; reveal.play().catch(() => {}); };
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) play(); });
+    }, { threshold: 0.55 }).observe(reveal);
+  } else {
+    play();
+  }
+}
 
 const c = document.querySelector('.slide-counter');
 const upd = () => {
