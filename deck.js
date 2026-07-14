@@ -22,7 +22,14 @@ if (reveal && 'IntersectionObserver' in window) {
 }
 
 const c = document.querySelector('.slide-counter');
-const upd = () => { if (c) c.textContent = `${idx()+1} / ${slides().length}`; };
+const upd = () => {
+  if (!c) return;
+  const s = slides(), i = Math.min(idx(), s.length - 1);
+  c.textContent = `${i+1} / ${s.length}`;
+  // the counter is bone: it disappears on the bone/linen slides unless it flips
+  const light = s[i] && (s[i].classList.contains('slide--light') || s[i].classList.contains('slide--linen'));
+  c.classList.toggle('is-light', !!light);
+};
 deck.addEventListener('scroll', upd, {passive:true});
 addEventListener('resize', upd);
 upd();
