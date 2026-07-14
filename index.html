@@ -295,7 +295,12 @@
   <section class="slide slide--dark">
     <div class="slide__content slide__content--wide" style="text-align:center">
       <div class="eyebrow" style="text-align:left">The store</div>
-      <img class="banner" src="images/site-home.jpg" alt="Agrarius Grow homepage design">
+      <!-- Phones get the REAL mobile design, not the desktop one shrunk to a
+           postage stamp. Both were generated from the same brand elements. -->
+      <picture>
+        <source media="(max-width:820px)" srcset="images/site-home-m.jpg">
+        <img class="banner" src="images/site-home.jpg" alt="Agrarius Grow homepage design">
+      </picture>
       <p class="body" style="margin:1.3rem auto 0;max-width:78ch;text-align:center">
         agrariusgrow.com on day one. The photograph runs into the page rather than sitting on it, the
         sachet stands where the two meet, and every element is drawn from the identity you have already
@@ -308,7 +313,10 @@
   <section class="slide slide--dark">
     <div class="slide__content slide__content--wide" style="text-align:center">
       <div class="eyebrow" style="text-align:left">Where it converts</div>
-      <img class="banner" src="images/site-pdp.jpg" alt="Agrarius Grow product page design">
+      <picture>
+        <source media="(max-width:820px)" srcset="images/site-pdp-m.jpg">
+        <img class="banner" src="images/site-pdp.jpg" alt="Agrarius Grow product page design">
+      </picture>
       <p class="body" style="margin:1.3rem auto 0;max-width:78ch;text-align:center">
         One product, one decision. Subscribe is the default rather than the discount, and the price
         ladder does the selling.
@@ -697,9 +705,13 @@
        straight on top of the logo). The mark carries the name. Let it land.
        Do NOT box this back into a rectangle on a bone slide. -->
   <section class="slide slide--reveal">
-    <video class="reveal-video" muted playsinline preload="auto">
-      <source src="images/logo-reveal.web.mp4" type="video/mp4">
-    </video>
+    <!-- On a phone the 16:9 cut cover-crops down to bare paper with the mark
+         off-frame, so portrait gets the 9:16 cut. The source is chosen in deck.js:
+         the `media` attribute on a <source> inside <video> is NOT honoured by
+         browsers (unlike <picture>), so it cannot be done in markup. -->
+    <video class="reveal-video" autoplay muted playsinline preload="auto"
+           data-landscape="images/logo-reveal.web.mp4"
+           data-portrait="images/logo-reveal-9x16.web.mp4"></video>
     <p class="reveal-domain">agrariusgrow.com</p>
   </section>
 

@@ -29,6 +29,24 @@ addEventListener('keydown', e => {
 const reveal = document.querySelector('.reveal-video');
 if (reveal) {
   reveal.loop = false;
+
+  // Pick the cut that matches the screen. A 16:9 reveal cover-cropped into a
+  // portrait phone shows bare paper with the mark off-frame, so portrait gets
+  // the 9:16 cut. Re-picked on resize/rotate, and only when it actually changes
+  // (setting .src reloads the video and would restart the animation).
+  const pickSource = () => {
+    const portrait = window.matchMedia('(max-aspect-ratio: 1/1)').matches;
+    const want = reveal.dataset[portrait ? 'portrait' : 'landscape'];
+    if (want && !reveal.currentSrc.endsWith(want.split('/').pop())) {
+      reveal.src = want;
+      reveal.load();
+      return true;
+    }
+    return false;
+  };
+  pickSource();
+  addEventListener('resize', () => { if (pickSource()) play(); });
+
   const play = () => { reveal.currentTime = 0; reveal.play().catch(() => {}); };
   if ('IntersectionObserver' in window) {
     new IntersectionObserver(entries => {
