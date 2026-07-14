@@ -297,6 +297,40 @@ html,body{height:100%;overflow:hidden;background:var(--ink)}
   font-weight:600;font-size:clamp(1.5rem,2.6vw,2.2rem);line-height:1.15}
 .contrast-vs{font-size:.74rem;letter-spacing:.2em;text-transform:uppercase;color:var(--earth-lift);font-weight:600}
 
+/* The cannabis wedge: text on the left, the grow scene readable on the right.
+   The stock scrim--left is too heavy here and swallowed the plant, so this slide
+   gets its own falloff and the copy is held to the left column. */
+/* Copy is held to a left column so it never lands on the sachet or the plant,
+   and the scrim stays near-opaque across that column, then releases so the grow
+   scene reads clean on the right. */
+.slide--wedge .slide__content{max-width:820px}
+.slide--wedge .body,.slide--wedge .claim-note{max-width:100%!important}
+.slide--wedge .grid-3{gap:1.6rem}
+.slide--wedge .metric-label{margin-top:.7rem}
+.slide--wedge .bg-image{object-position:88% center}
+/* Holding the copy to a column makes it taller: it ran past 1440x900 and
+   2000x1100 until this squeeze. */
+@media (min-width:821px) and (max-height:1180px){
+  .slide--wedge .section-title{font-size:clamp(1.7rem,2.8vw,2.5rem);margin-bottom:1.2rem!important}
+  .slide--wedge .metric--sm{font-size:clamp(1.9rem,3vw,2.7rem)}
+  .slide--wedge .grid-3{gap:1.3rem;margin-bottom:1.6rem!important}
+  .slide--wedge .metric-note{font-size:.8rem}
+  .slide--wedge .body{font-size:.96rem}
+  .slide--wedge .claim-note{margin-top:1.2rem;padding:1rem 1.2rem;font-size:.88rem}
+  .slide--wedge .eyebrow{margin-bottom:1rem}
+}
+.slide--wedge .scrim--left{background:linear-gradient(90deg,
+  rgba(14,26,20,.97) 0%,rgba(14,26,20,.95) 48%,rgba(14,26,20,.88) 62%,
+  rgba(14,26,20,.5) 78%,rgba(14,26,20,.12) 92%,rgba(14,26,20,0) 100%)}
+@media (max-width:820px){
+  /* On a phone this slide is text-heavy, so a full-height photo behind the copy
+     has to be scrimmed until the photo is gone. Show it properly instead: a real
+     image band at the top, copy underneath on ink. */
+  .slide--wedge .slide__content{max-width:100%;padding-top:2.5rem}
+  .slide--wedge .bg-image{position:relative;height:58vw;object-position:center 30%}
+  .slide--wedge .scrim--left{display:none}
+}
+
 /* The pipelines slide carries six cards plus a pull quote: the densest slide in
    the deck. It runs ~13px past a 1440x900 laptop at full type scale, which is
    below the short-viewport breakpoint, so it gets its own squeeze. */
