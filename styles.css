@@ -515,6 +515,12 @@ html,body{height:100%;overflow:hidden;background:var(--ink)}
   .close-reveal{width:82vw}
   .lockup{aspect-ratio:16/9}
 
+  /* On a phone the copy sits at the TOP of the brand-world slide, and the 9:16
+     citrus plate is bright sky up there. The bottom-only scrim left the headline
+     floating on pale grey, so darken both ends on mobile. */
+  .scrim--bottom{background:linear-gradient(0deg,
+    rgba(14,26,20,.88) 0%,rgba(14,26,20,.45) 45%,rgba(14,26,20,.82) 100%)}
+
   .logo--corner{top:24px;width:52px}
   .slide:has(.logo--corner) .slide__content{padding-top:120px}
 
